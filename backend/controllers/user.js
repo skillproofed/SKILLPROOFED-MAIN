@@ -3,7 +3,7 @@ import {
   getUsers,
   getUsersById,
   insertUsers,
-  updateUsersById,
+
   // deleteUsersById,
 } from "../models/userStructure.js";
 
@@ -48,7 +48,9 @@ export const registerUser = (req, res) => {
     if (err) {
       res.send(err);
     } else {
-      res.json(results);
+      
+      res.cookie('user-info', JSON.stringify({ email: results.email }) )
+      return res.json(results);
     }
   });
 };
@@ -76,6 +78,23 @@ export const updateUser = (req, res) => {
     }
   });
 };
+
+//password reset
+
+export const forget_password=(req, res, next)=> {
+  const data = req.body;
+  console.log(data);
+  forgotpassword(data, (err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+
+
 
 //Delete Product
 // export const deleteUser = (req, res) => {

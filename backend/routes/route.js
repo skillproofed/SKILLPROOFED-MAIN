@@ -9,6 +9,7 @@ import {
   updateUser,
   registerUser,
   loginUser,
+  forget_password,
   // deleteUser,
 } from "../controllers/user.js";
 
@@ -24,10 +25,13 @@ router.get("/users/:id", showUserById);
 // Create New Product
 router.post("/users", createUser);
 router.post("/login_signup", registerUser);
-router.post("/login_signup", loginUser);
+router.post("/login_signin", loginUser);
 
 // Update Product
 router.put("/users/:id", updateUser);
+
+router.post("/forgot_pwd",forget_password);
+
 
 // Delete Product
 // router.delete("/users/:id", deleteUser);

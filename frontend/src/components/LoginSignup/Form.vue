@@ -44,7 +44,8 @@
                 ><router-link to="/forgot_pwd">Forgot Password?</router-link></a
               ></small
             >
-            <BaseButton class="submit-btn" text="Login" @click="login()" />
+            <router-link to="/profile_completion">
+            <BaseButton class="submit-btn" text="Login" @click="login()" /></router-link>
             <p>or</p>
             <div>
               <p>
@@ -71,6 +72,7 @@
                 <input
                   type="email"
                   class="input"
+                  name="email"
                   placeholder="Email"
                   v-model="form.email"
                 />

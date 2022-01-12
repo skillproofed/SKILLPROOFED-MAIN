@@ -1,4 +1,5 @@
 <template>
+  <form>
   <div>
     <BgParticles />
     <div class="animated bounceInDown">
@@ -8,27 +9,71 @@
           <div class="forgot">
             <h2 class="form-title" id="forgot"><span></span>Forgot Password</h2>
             <div class="form-holder">
-              <input type="email" class="input" placeholder="Email" />
+              <input type="email" class="input" placeholder="Email"  v-model="form.email"/>
             </div>
-            <router-link to="pwd_reset">
-              <BaseButton class="submit-btn" text="Send" @onClick="alert('Link Send');s" />
-            </router-link>
+              <BaseButton class="submitbtn" text="Send" @onClick="submit()" />
           </div>
         </div>
       </div>
     </div>
   </div>
+  </form>
 </template>
 
 <script>
 // import Swal from 'sweetalert2'
+import axios from "axios";
 import BgParticles from "../LoginSignup/BgParticles.vue";
 import BaseButton from "../BaseButton.vue";
 export default {
+
   components: {
     BgParticles,
     BaseButton,
   },
+  name:"Form",
+    data:()=>{
+      return{
+        form:{
+          email:"",
+        },
+      };
+    },
+    methods:{
+      submit() {
+      axios
+        .post("http://localhost:5000/forgot_pwd", this.form)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          // error.response.status Check status code
+          console.log(error);
+        })
+        .finally(() => {
+          //Perform action in always
+        });
+    },
+  },
+  // mounted() {
+  //   console.clear();
+  //   const submitbtn = document.getElementById("forgetpass");
+  //   submitbtn.addEventListener("click", (e) => {
+  //     let parent = e.target.parentNode.parentNode;
+  //     Array.from(e.target.parentNode.parentNode.classList).find((element) => {
+  //       if (element !== "slide-up") {
+  //         // parent.classList.add("slide-up");
+  //       } else {
+  //         submitbtn.parentNode.classList.add("slide-up");
+  //         parent.classList.remove("slide-up");
+  //       }
+  //     });
+  //   });
+    
+  // },
+};
+
+
   // mounted() {
   //   showAlert() {
   //     Swal.fire({
@@ -38,7 +83,7 @@ export default {
   //     confirmButtonText: 'Cool'
   //   });
   // }
-};
+
 </script>
 
 <style scoped>
@@ -120,7 +165,7 @@ export default {
 /* .form-structor .forogt .form-holder .input::-webkit-input-placeholder {
   color: rgba(0, 0, 0, 0.4);
 } */
-.form-structor .forgot .submit-btn {
+.form-structor .forgot .submitbtn {
   background-color: rgba(0, 0, 0, 0.4);
   color: rgba(255, 255, 255, 0.7);
   border: 0;
@@ -136,7 +181,7 @@ export default {
   visibility: visible;
   -webkit-transition: all 0.3s ease;
 }
-.form-structor .forgot .submit-btn:hover {
+.form-structor .forgot .submitbtn:hover {
   transition: all 0.3s ease;
   background-color: rgba(0, 0, 0, 0.8);
 }
