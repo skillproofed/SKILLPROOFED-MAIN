@@ -1,5 +1,5 @@
 <template>
-  <form>
+
   <div>
     <BgParticles />
     <div class="animated bounceInDown">
@@ -9,15 +9,15 @@
           <div class="forgot">
             <h2 class="form-title" id="forgot"><span></span>Forgot Password</h2>
             <div class="form-holder">
-              <input type="email" class="input" placeholder="Email"  v-model="form.email"/>
+              <input type="email" class="input" placeholder="Email"  v-model="email"/>
             </div>
-              <BaseButton class="submitbtn" text="Send" @onClick="submit()" />
+              <BaseButton class="submitbtn" text="Send" @click="submit()" />
           </div>
         </div>
       </div>
     </div>
   </div>
-  </form>
+
 </template>
 
 <script>
@@ -34,15 +34,14 @@ export default {
   name:"Form",
     data:()=>{
       return{
-        form:{
           email:"",
-        },
       };
     },
     methods:{
       submit() {
+      var data={"email":this.email}
       axios
-        .post("http://localhost:5000/forgot_pwd", this.form)
+        .post("http://localhost:5000/forgot_pwd", data)
         .then((res) => {
           console.log(res);
         })

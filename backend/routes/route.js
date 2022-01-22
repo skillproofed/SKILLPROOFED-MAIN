@@ -9,7 +9,7 @@ import {
   updateUser,
   registerUser,
   loginUser,
-  forget_password,
+  forgot_password,
   // deleteUser,
 } from "../controllers/user.js";
 
@@ -30,7 +30,7 @@ router.post("/login_signin", loginUser);
 // Update Product
 router.put("/users/:id", updateUser);
 
-router.post("/forgot_pwd",forget_password);
+router.post("/forgot_pwd",forgot_password);
 
 
 // Delete Product

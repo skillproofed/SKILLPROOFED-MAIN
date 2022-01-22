@@ -3,7 +3,7 @@ import {
   getUsers,
   getUsersById,
   insertUsers,
-
+  forget_password
   // deleteUsersById,
 } from "../models/userStructure.js";
 
@@ -81,10 +81,10 @@ export const updateUser = (req, res) => {
 
 //password reset
 
-export const forget_password=(req, res, next)=> {
+export const forgot_password=(req, res, next)=> {
   const data = req.body;
   console.log(data);
-  forgotpassword(data, (err, results) => {
+  forget_password(data.email, (err, results) => {
     if (err) {
       res.send(err);
     } else {

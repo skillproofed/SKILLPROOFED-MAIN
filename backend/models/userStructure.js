@@ -8,7 +8,7 @@ const require = createRequire(import.meta.url);
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-// const mysql = require('mysql');
+const mysql = require("mysql");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const app = express();
@@ -241,10 +241,9 @@ app.get("/verification/", (userdata, res) => {
 //password reset
 export const forget_password = (data, result) => {
 
-  console.log("hi "+data);
   var verify = crs({ length: 128, type: 'url-safe'})
 
-  const token = encodeVerification({ email: data.email, verify })
+  const token = encodeVerification({ email: data, verify })
 
   var mailOption = {
     from: "eng18ct0032@gmail.com", // sender email
@@ -253,9 +252,9 @@ export const forget_password = (data, result) => {
     html: `<h1> Please Click on this link<h1><br><br><a href="http://localhost:5000/verification/?verify=${token}">CLICK ME TO ACTIVATE YOUR ACCOUNT</a>`,
   };
   var userData = {
-    email: data.email,
+    email: data,
   };
-
+  console.log(userData)
   db.query("INSERT INTO resettoken SET ?", [userData], (err, results) => {
     if (err) {
       console.log(err);
