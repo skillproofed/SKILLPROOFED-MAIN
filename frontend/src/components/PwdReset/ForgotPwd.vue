@@ -38,8 +38,10 @@ export default {
       };
     },
     methods:{
+      
       submit() {
       var data={"email":this.email}
+      console.log(data)
       axios
         .post("http://localhost:5000/forgot_pwd", data)
         .then((res) => {

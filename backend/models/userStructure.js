@@ -247,7 +247,7 @@ export const forget_password = (data, result) => {
 
   var mailOption = {
     from: "eng18ct0032@gmail.com", // sender email
-    to: `${data.email}`, // receiver email
+    to: `${data}`, // receiver email
     subject: "Account Verification",
     html: `<h1> Please Click on this link<h1><br><br><a href="http://localhost:5000/verification/?verify=${token}">CLICK ME TO ACTIVATE YOUR ACCOUNT</a>`,
   };
@@ -255,7 +255,7 @@ export const forget_password = (data, result) => {
     email: data,
   };
   console.log(userData)
-  db.query("INSERT INTO resettoken SET ?", [userData], (err, results) => {
+  db.query("INSERT INTO resettokens SET ?", [userData], (err, results) => {
     if (err) {
       console.log(err);
       result(err, null);
